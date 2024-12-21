@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Главная страница{% endblock %}
+{% block content %}
+  <h1 class="mb-4 mt-3">
+    Добро пожаловать,
+    {% if user.first_name %}
+      {{ user.first_name }}
+    {% else %}
+      {{ user.username }}
+    {% endif %}
+    !
+  </h1>
+  <div class="row">
+    <div class="col-md-4">
+      <h4>Общее количество рассылок</h4>
+      <p>{{ total_mailings }}</p>
+    </div>
+    <div class="col-md-4">
+      <h4>Активные рассылки</h4>
+      <p>{{ active_mailings }}</p>
+    </div>
+    <div class="col-md-4">
+      <h4>Уникальные получатели</h4>
+      <p>{{ unique_recipients }}</p>
+    </div>
+    <div class="text-center">
+      <img src="https://img.freepik.com/free-vector/envelope-concept-illustration_114360-1353.jpg"
+           alt="mail"
+           class="img-fluid">
+    </div>
+  </div>
+{% endblock %}

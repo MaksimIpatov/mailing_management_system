@@ -1,0 +1,99 @@
+from django.urls import path
+
+from senders.views import (
+    MailAttemptListView,
+    MailingCreateView,
+    MailingDeleteView,
+    MailingListView,
+    MailingSendView,
+    MailingStatisticView,
+    MailingUpdateView,
+    MessageCreateView,
+    MessageDeleteView,
+    MessageListView,
+    MessageUpdateView,
+    RecipientCreateView,
+    RecipientDeleteView,
+    RecipientListView,
+    RecipientUpdateView,
+)
+
+app_name = "senders"
+
+urlpatterns = [
+    path(
+        "statistics/",
+        MailingStatisticView.as_view(),
+        name="statistics",
+    ),
+    path(
+        "recipients/",
+        RecipientListView.as_view(),
+        name="recipient_list",
+    ),
+    path(
+        "recipient/add/",
+        RecipientCreateView.as_view(),
+        name="recipient_create",
+    ),
+    path(
+        "recipient/edit/<int:pk>/",
+        RecipientUpdateView.as_view(),
+        name="recipient_edit",
+    ),
+    path(
+        "recipient/delete/<int:pk>/",
+        RecipientDeleteView.as_view(),
+        name="recipient_delete",
+    ),
+    path(
+        "messages/",
+        MessageListView.as_view(),
+        name="message_list",
+    ),
+    path(
+        "message/add/",
+        MessageCreateView.as_view(),
+        name="message_create",
+    ),
+    path(
+        "message/edit/<int:pk>/",
+        MessageUpdateView.as_view(),
+        name="message_edit",
+    ),
+    path(
+        "message/delete/<int:pk>/",
+        MessageDeleteView.as_view(),
+        name="message_delete",
+    ),
+    path(
+        "mailings/",
+        MailingListView.as_view(),
+        name="mailing_list",
+    ),
+    path(
+        "mailing/add/",
+        MailingCreateView.as_view(),
+        name="mailing_create",
+    ),
+    path(
+        "mailing/edit/<int:pk>/",
+        MailingUpdateView.as_view(),
+        name="mailing_edit",
+    ),
+    path(
+        "mailing/delete/<int:pk>/",
+        MailingDeleteView.as_view(),
+        name="mailing_delete",
+    ),
+    path(
+        "mail_attempts/",
+        MailAttemptListView.as_view(),
+        name="mail_attempt_list",
+    ),
+    path(
+        "mailing/send/<int:pk>/",
+        MailingSendView.as_view(),
+        name="mailing_send",
+    ),
+]

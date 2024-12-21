@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}Список рассылок{% endblock %}
+{% block content %}
+  <h2 class="mt-3 mb-3">
+    Список рассылок
+    <a href="{% url 'senders:mailing_create' %}" class="btn btn-primary">+</a>
+  </h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Время отправки</th>
+        <th>Время окончания</th>
+        <th>Статус</th>
+        <th>Сообщение</th>
+        <th>Получатели</th>
+        {% if mailing.owner == user %}<th>Действия</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for mailing in mailings %}
+        <tr>
+          <td>{{ mailing.start_date }}</td>
+          <td>{{ mailing.end_date }}</td>
+          <td>{{ mailing.get_status_display }}</td>
+          <td>{{ mailing.message.body|truncatewords:5 }}</td>
+          <td>{{ mailing.recipients.count }}</td>
+          {% if request.user == mailing.owner %}
+            <td>
+              <a href="{% url 'senders:mailing_edit' mailing.id %}"
+                 class="btn btn-warning btn-sm">Редактировать</a>
+              <a href="{% url 'senders:mailing_delete' mailing.id %}"
+                 class="btn btn-danger btn-sm">Удалить</a>
+            </td>
+          <td>
+            <a href="{% url 'senders:mailing_send' mailing.id %}" class="btn btn-success btn-sm">Отправить</a>
+          </td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

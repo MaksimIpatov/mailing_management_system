@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Удалить получателя{% endblock %}
+{% block content %}
+  <h2>Вы уверены, что хотите удалить получателя {{ recipient.name }}?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'senders:recipient_list' %}" class="btn btn-secondary">Отменить</a>
+  </form>
+{% endblock %}

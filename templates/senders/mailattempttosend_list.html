@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h2 class="mt-3 mb-3">Список попыток рассылки</h2>
+  {% if attempts %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Время попытки</th>
+          <th>Статус</th>
+          <th>Ответ сервера</th>
+          <th>Рассылка</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attempt in attempts %}
+          <tr>
+            <td>{{ attempt.attempt_date }}</td>
+            <td>{{ attempt.get_status_display }}</td>
+            <td>
+              {% if attempt.status == "success" %}
+                <span>Успех</span>
+              {% else %}
+                <span>Отказ</span>
+              {% endif %}
+            </td>
+            <td>{{ attempt.mailing.message.subject }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Нет данных для отображения.</p>
+  {% endif %}
+{% endblock %}

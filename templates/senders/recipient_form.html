@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}Добавить/Редактировать получателя{% endblock %}
+{% block content %}
+  <h2>
+    {% if recipient %}
+      Редактировать
+    {% else %}
+      Добавить
+    {% endif %}
+    получателя
+  </h2>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">
+      {% if recipient %}
+        Сохранить
+      {% else %}
+        Добавить
+      {% endif %}
+    </button>
+  </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load set_mailing_status %}
+{% block content %}
+  <h2 class="mt-3 mb-3">Статистика рассылок</h2>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th>Статус</th>
+        <th>Успешные попытки</th>
+        <th>Неуспешные попытки</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mailing in mailings %}
+        <tr>
+          <td>{{ mailing.status|status_display }}</td>
+          <td>{{ mailing.total_success_count }}</td>
+          <td>{{ mailing.total_failure_count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="text-center">
+    <img src="https://img.freepik.com/free-vector/data-analysis-concept-illustration_114360-8073.jpg"
+         alt="mail"
+         class="img-fluid">
+  </div>
+{% endblock %}
